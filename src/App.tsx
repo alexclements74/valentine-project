@@ -1,34 +1,68 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
+const phrases = [
+  "No",
+  "Are you sure?",
+  "Really?",
+  "Absolutely sure?",
+  "Like 100% positive?",
+  "You're missing out",
+  "Okay enough playing around",
+  "No seriously, stop",
+  "Man...",
+];
+
 function App() {
-  const [count, setCount] = useState(0);
+  const [noCount, setNoCount] = useState(0);
+  const [yesPressed, setYesPressed] = useState(false);
+  const yesButtonSize = noCount * 20 + 16;
+
+  function handleNoClick() {
+    setNoCount(noCount + 1);
+  }
+
+  function getNoButtonText() {
+    return phrases[Math.min(noCount, phrases.length - 1)];
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="valentine-container">
+      {yesPressed ? (
+        <>
+          <div className="gif-container">
+            <img
+              alt="cute gif"
+              src="https://tenor.com/view/catkiss-gif-3595658823685090282.gif"
+            />
+          </div>
+          <div className="text">I love you !!</div>
+        </>
+      ) : (
+        <>
+          <div className="gif-container">
+            <img
+              alt="hearts"
+              src="https://tenor.com/view/goma-goma-cat-goma-peach-goma-peach-love-peach-and-goma-gif-10012230355003332465.gif"
+            />
+          </div>
+
+          <div className="text">Will you be my Valentine, darling?</div>
+          <div>
+            <button
+              className="yes-button"
+              onClick={() => setYesPressed(true)}
+              style={{ fontSize: yesButtonSize }}
+            >
+              Yes
+            </button>
+            <button className="no-button" onClick={handleNoClick}>
+              {getNoButtonText()}
+            </button>
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 
