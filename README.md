@@ -1,3 +1,3 @@
-# Valetine's Project
+# Valentine's Project
 
 This was a cute, quick Valentines website created
